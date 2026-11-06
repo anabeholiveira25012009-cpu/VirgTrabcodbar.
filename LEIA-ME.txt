@@ -1,0 +1,34 @@
+# VirgTrabcodbar — Leitor de Código de Barras
+
+## Descrição
+Aplicativo web feito com HTML, CSS e JavaScript para identificar códigos de barras de embalagens, consultar informações de produtos na internet e exportar a lista de códigos lidos.
+
+## Funções
+- **Câmera:** ativa a câmera do dispositivo e lê o código de barras.
+- **Código digitado:** permite inserir manualmente os números do código.
+- **Foto:** permite selecionar ou tirar uma foto para tentar ler o código.
+- **Consulta online:** pesquisa o código na base Open Food Facts e mostra nome, marca e quantidade quando cadastrados.
+- **Lista:** registra o código, a descrição disponível e a data/hora.
+- **Exportação:** baixa `codigos.csv`, que pode ser aberto em programas de planilha.
+
+## Arquivos
+- `index.html`: estrutura da página.
+- `style.css`: visual e adaptação para telas menores.
+- `app.js`: câmera, leitura da foto, consulta online, lista e exportação.
+
+## Como executar
+1. Extraia a pasta `VirgTrabcodbar`.
+2. Para testar no computador, abra um terminal dentro da pasta e execute:
+   `python -m http.server 8000`
+3. No navegador, acesse `http://localhost:8000`.
+4. Clique em **Ativar câmera** e permita o acesso quando o navegador solicitar.
+5. Para testar em celular ou tablet, publique a pasta em um serviço que forneça HTTPS e abra o endereço no navegador.
+
+## Requisitos e observações
+- É necessária conexão com a internet para carregar a biblioteca ZXing e consultar a base Open Food Facts.
+- O acesso à câmera exige HTTPS ou localhost e permissão do usuário. Por isso, abrir o arquivo HTML diretamente (`file://`) pode impedir o uso da câmera.
+- A consulta usa a base pública Open Food Facts. Nem todos os produtos estão cadastrados; nesse caso, o código ainda é registrado, mas a descrição não estará disponível.
+- A interface é responsiva e pode ser utilizada em navegadores modernos de celulares, tablets e computadores Windows ou Linux.
+
+## Data de referência
+10/11/2026 — Turma 3C

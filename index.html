@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173b67">
+  <title>Leitor de Código de Barras</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@zxing/browser@0.1.5/umd/zxing-browser.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="brand-mark">VB</div>
+    <div>
+      <h1>Leitor de Código de Barras</h1>
+      <p>Consulte produtos e organize seus códigos</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Adicionar produto</h2>
+      <div class="tabs" role="group" aria-label="Modo de leitura">
+        <button class="tab active" data-mode="camera">Câmera</button>
+        <button class="tab" data-mode="manual">Digitar código</button>
+        <button class="tab" data-mode="photo">Foto do produto</button>
+      </div>
+
+      <div id="cameraMode" class="mode">
+        <p>Aponte a câmera para o código de barras da embalagem.</p>
+        <video id="video" muted playsinline></video>
+        <div class="actions">
+          <button id="startCamera" class="primary">Ativar câmera</button>
+          <button id="stopCamera" class="secondary" disabled>Parar câmera</button>
+        </div>
+        <small class="hint">A câmera precisa de permissão e, normalmente, de uma conexão HTTPS ou acesso por localhost.</small>
+      </div>
+
+      <div id="manualMode" class="mode hidden">
+        <p>Digite os números que aparecem abaixo do código de barras.</p>
+        <form id="manualForm" class="inline-form">
+          <input id="manualCode" type="text" inputmode="numeric" autocomplete="off"
+                 placeholder="Ex.: 7891234567890" aria-label="Código de barras" required>
+          <button class="primary" type="submit">Buscar</button>
+        </form>
+      </div>
+
+      <div id="photoMode" class="mode hidden">
+        <p>Selecione uma foto nítida do código de barras da embalagem.</p>
+        <label class="file-picker">
+          <span>Escolher foto</span>
+          <input id="photoInput" type="file" accept="image/*" capture="environment">
+        </label>
+        <p id="photoStatus" class="hint" aria-live="polite"></p>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="section-heading">
+        <h2>Produto encontrado</h2>
+        <span id="resultBadge" class="badge">Aguardando leitura</span>
+      </div>
+      <div id="productResult" class="product-result empty">
+        Os dados do produto aparecerão aqui depois da leitura do código.
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <h2>Lista de códigos</h2>
+          <p class="subtext">Códigos lidos nesta sessão.</p>
+        </div>
+        <button id="exportButton" class="primary" disabled>Exportar lista</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Código</th><th>Produto</th><th>Data e hora</th></tr></thead>
+          <tbody id="codeList">
+            <tr id="emptyRow"><td colspan="3" class="empty-cell">Nenhum código lido ainda.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>Consulta de produtos: Open Food Facts. A disponibilidade da descrição depende do cadastro do produto na base.</footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
